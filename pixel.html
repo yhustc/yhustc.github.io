@@ -24,7 +24,7 @@
   <div id="app">
     <el-row>
       <h3>Button Click</h3>
-      <el-button @click="onBtnClick">Button</el-button>
+      <el-button id="click_btn" @click="onBtnClick">Button</el-button>
       <el-dialog :visible.sync="visible" title="Hello world">
         <p>Button clicked</p>
       </el-dialog>
@@ -37,13 +37,13 @@
           <el-input id="email" v-model="form.email" placeholder="email"></el-input>
         </el-form-item>
         <el-form-item label="Age">
-          <el-select v-model="form.age" placeholder="age">
+          <el-select id="age" v-model="form.age" placeholder="age">
             <el-option label="18-" value="0"></el-option>
             <el-option label="18+" value="1"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">Submit</el-button>
+          <el-button id="submit_btn" type="primary" @click="onSubmit">Submit</el-button>
         </el-form-item>
       </el-form>
     </el-row>
