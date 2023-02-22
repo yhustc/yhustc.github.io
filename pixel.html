@@ -2,15 +2,57 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <title>Pixel Event Test Page</title>
   <!-- import CSS -->
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+  
+  <script>
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++
+)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=i+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+    
+      ttq.load('CFR6LGJC77UBG01LTS00');
+      ttq.page();
+    }(window, document, 'ttq');
+  </script>
+  
 </head>
 <body>
   <div id="app">
-    <el-button @click="visible = true">Button</el-button>
-    <el-dialog :visible.sync="visible" title="Hello world">
-      <p>Try Element</p>
-    </el-dialog>
+    <el-col :span="12">
+      <h3>Button Click</h3>
+      <el-button @click="onBtnClick">Button</el-button>
+      <el-dialog :visible.sync="visible" title="Hello world">
+        <p>Button clicked</p>
+      </el-dialog>
+
+
+      <h3>Form Submission</h3>
+      <el-form :inline="true" :model="form">
+        <el-form-item label="email">
+          <el-input v-model="form.email" placeholder="email"></el-input>
+        </el-form-item>
+        <el-form-item label="Age">
+          <el-select v-model="form.age" placeholder="age">
+            <el-option label="18-" value="0"></el-option>
+            <el-option label="18+" value="1"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="onSubmit">Submit</el-button>
+        </el-form-item>
+      </el-form>
+
+
+      <h3>Url Prefix</h3>
+      <el-steps :active="active_step" finish-status="success">
+        <el-step title="step 1"></el-step>
+        <el-step title="step 2"></el-step>
+        <el-step title="step 3"></el-step>
+      </el-steps>
+      <el-button style="margin-top: 12px;" @click="onNextStep">next step</el-button>
+    </el-col>
   </div>
 </body>
   <!-- import Vue before Element -->
@@ -21,7 +63,28 @@
     new Vue({
       el: '#app',
       data: function() {
-        return { visible: false }
+        return {
+          visible: false,
+          form: {
+            email: 'test@gmail.com',
+            age: '1'
+          },
+          active_step: 0
+        }
+      },
+      methods: {
+        onBtnClick() {
+          console.log('click!');
+          this.visible = true;
+        },
+        onSubmit() {
+          console.log('submit!');
+        },
+        onNextStep() {
+          if (this.active_step++ > 2) this.active_step = 0;
+          var url = location.pathname + '?step=' + (this.active_step + 1);
+          history.pushState({url: url, title: document.title}, document.title, url);
+        }
       }
     })
   </script>
