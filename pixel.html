@@ -22,18 +22,19 @@
 </head>
 <body>
   <div id="app">
-    <el-col :span="24">
+    <el-row>
       <h3>Button Click</h3>
       <el-button @click="onBtnClick">Button</el-button>
       <el-dialog :visible.sync="visible" title="Hello world">
         <p>Button clicked</p>
       </el-dialog>
-
-
+    </el-row>
+    
+    <el-row>
       <h3>Form Submission</h3>
       <el-form :inline="true" :model="form">
         <el-form-item label="email">
-          <el-input v-model="form.email" placeholder="email"></el-input>
+          <el-input id="email" v-model="form.email" placeholder="email"></el-input>
         </el-form-item>
         <el-form-item label="Age">
           <el-select v-model="form.age" placeholder="age">
@@ -45,8 +46,9 @@
           <el-button type="primary" @click="onSubmit">Submit</el-button>
         </el-form-item>
       </el-form>
+    </el-row>
 
-
+    <el-row>
       <h3>Url Prefix</h3>
       <el-steps :active="active_step" finish-status="success">
         <el-step title="step 1"></el-step>
@@ -54,7 +56,7 @@
         <el-step title="step 3"></el-step>
       </el-steps>
       <el-button style="margin-top: 12px;" @click="onNextStep">next step</el-button>
-    </el-col>
+    </el-row>
   </div>
 </body>
   <!-- import Vue before Element -->
